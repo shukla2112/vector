@@ -120,8 +120,10 @@ impl HttpSink for HoneycombConfig {
 
 impl HoneycombConfig {
     fn build_uri(&self) -> Uri {
-        let uri = format!("{}/{}", HOST.clone(), self.dataset);
-
+        let uri = match std::env::var("HONEYCOMB_HOST") {
+           Ok (link)  => format!("{}/{}", link, self.dataset),
+           Err (_err) => format!("{}/{}", HOST.clone(), self.dataset)
+        };
         uri.parse::<http::Uri>()
             .expect("This should be a valid uri")
     }
