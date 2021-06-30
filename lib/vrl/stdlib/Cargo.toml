@@ -21,6 +21,7 @@ hostname = { version = "0.3", optional = true }
 lazy_static = { version = "1", optional = true }
 md-5 = { version = "0.9", optional = true }
 nom = { version = "6", optional = true }
+percent-encoding = { version = "2.1", optional = true }
 regex = { version = "1", optional = true }
 rust_decimal = { version = "1", optional = true }
 serde_json = { version = "1", optional = true }
@@ -43,16 +44,20 @@ default = [
     "append",
     "array",
     "assert",
+    "assert_eq",
     "boolean",
     "ceil",
     "compact",
     "contains",
     "decode_base64",
+    "decode_percent",
     "del",
     "downcase",
     "encode_base64",
     "encode_json",
+    "encode_key_value",
     "encode_logfmt",
+    "encode_percent",
     "ends_with",
     "exists",
     "flatten",
@@ -83,6 +88,7 @@ default = [
     "log",
     "match",
     "match_any",
+    "match_array",
     "md5",
     "merge",
     "now",
@@ -105,6 +111,7 @@ default = [
     "parse_query_string",
     "parse_regex",
     "parse_regex_all",
+    "parse_ruby_hash",
     "parse_syslog",
     "parse_timestamp",
     "parse_tokens",
@@ -142,16 +149,20 @@ default = [
 append = []
 array = []
 assert = []
+assert_eq = []
 boolean = []
 ceil = []
 compact = []
 contains = []
 decode_base64 = ["base64"]
+decode_percent = ["percent-encoding"]
 del = []
 downcase = []
 encode_base64 = ["base64"]
 encode_json = ["serde_json"]
-encode_logfmt = []
+encode_key_value = []
+encode_logfmt = ["encode_key_value"]
+encode_percent = ["percent-encoding"]
 ends_with = []
 exists = []
 flatten = []
@@ -182,6 +193,7 @@ length = []
 log = ["tracing"]
 match = ["regex"]
 match_any = ["regex"]
+match_array = ["regex"]
 md5 = ["md-5", "hex"]
 merge = []
 now = ["chrono"]
@@ -204,6 +216,7 @@ parse_nginx_log = ["chrono", "regex"]
 parse_query_string = []
 parse_regex = ["regex"]
 parse_regex_all = ["regex"]
+parse_ruby_hash = ["nom"]
 parse_syslog = ["syslog_loose"]
 parse_timestamp = ["shared/conversion"]
 parse_tokens = ["shared/tokenize"]
