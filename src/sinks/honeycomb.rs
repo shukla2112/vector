@@ -140,7 +140,7 @@ async fn healthcheck(config: HoneycombConfig, client: HttpClient) -> crate::Resu
     let status = res.status();
     let body = hyper::body::to_bytes(res.into_body()).await?;
 
-    if status == StatusCode::BAD_REQUEST {
+    if ( status == StatusCode::BAD_REQUEST || status == StatusCode::OK ) {
         Ok(())
     } else if status == StatusCode::UNAUTHORIZED {
         let json: serde_json::Value = serde_json::from_slice(&body[..])?;
